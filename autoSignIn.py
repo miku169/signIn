@@ -116,7 +116,7 @@ def create_log(text):
 # 自动打卡
 def autoSignIn():
     global dkStart
-    #time.sleep(int(random.random() * 1000 // 1 % 60))
+    time.sleep(int(random.random() * 1000 // 1 % 60))
     try:
         location = ali_pay_login()
         myCookies = get_cookies(location)
