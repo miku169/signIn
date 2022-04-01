@@ -1,0 +1,30 @@
+name: autoSignIn
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: "0  0 * * *" 
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - name: SignIn
+      run: |
+        python ./SignIn.py
+      env:
+        card_id: ${{ secrets.card_id }}
+        sfzMd5: ${{ secrets.sfzMd5 }}
+        SERVER: ${{ secrets.SERVER }}
+        SCKEY: ${{ secrets.SCKEY }}
+        school_no: ${{ secrets.school_no }}
