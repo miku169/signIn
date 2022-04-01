@@ -102,18 +102,9 @@ def checkin(my_cookies):
     return res.text
 
 
-def print_log():
-    try:
-        f = open('lhplog.json', 'r', encoding='utf-8')
-        log = f.read()
-        print(log)
-        f.close()
-    except IOError:
-        print('cant open lhplog.json!')
-
 def create_log(text):
     msg = (re.search(r'("msg":.*?),', text)).group(1)
-    tm = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+    tm = time.strftime("%Y-%m-%d %X",time.localtime())
     l = tm + ',' + msg
     return l
 
@@ -121,7 +112,7 @@ def create_log(text):
 # 自动打卡
 def autoSignIn():
     global dkStart
-    time.sleep(int(random.random() * 1000 // 1 % 60))
+    #time.sleep(int(random.random() * 1000 // 1 % 60))
     try:
         location = ali_pay_login()
         myCookies = get_cookies(location)
