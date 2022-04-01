@@ -21,7 +21,7 @@ jobs:
         python-version: 3.9
     - name: SignIn
       run: |
-        python ./SignIn.py
+        python ./autoSignIn.py
       env:
         card_id: ${{ secrets.card_id }}
         sfzMd5: ${{ secrets.sfzMd5 }}
