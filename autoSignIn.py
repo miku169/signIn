@@ -8,6 +8,9 @@ import urllib
 import os
 from datetime import datetime
 import random
+import pytz
+
+pytz.country_timezones('cn')
 
 # 系统变量
 card_id = os.environ['card_id']
@@ -104,7 +107,7 @@ def checkin(my_cookies):
 
 def create_log(text):
     msg = (re.search(r'("msg":.*?),', text)).group(1)
-    tm = time.strftime("%Y-%m-%d %X",time.localtime())
+    tm = time.strftime("%Y-%m-%d %H:%M:%S",time.localtime())
     l = tm + ',' + msg
     return l
 
