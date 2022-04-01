@@ -8,6 +8,10 @@ import urllib
 import os
 from datetime import datetime
 import random
+import pytz
+
+tz = pytz.timezone('Asia/Shanghai')
+#获得此时区的当期那时间
 
 # 系统变量
 card_id = os.environ['card_id']
@@ -104,7 +108,7 @@ def checkin(my_cookies):
 
 def create_log(text):
     msg = (re.search(r'("msg":.*?),', text)).group(1)
-    tm = time.strftime("%Y-%m-%d %H:%M:%S",time.localtime())
+    tm = time.strftime("%Y-%m-%d %H:%M:%S",datetime.now(tz))
     l = tm + ',' + msg
     return l
 
