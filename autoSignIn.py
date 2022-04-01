@@ -108,7 +108,7 @@ def checkin(my_cookies):
 
 def create_log(text):
     msg = (re.search(r'("msg":.*?),', text)).group(1)
-    tm = datetime.now(tz)
+    tm = datetime.datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S")
     l = tm + ',' + msg
     return l
 
