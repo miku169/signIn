@@ -8,9 +8,6 @@ import urllib
 import os
 from datetime import datetime
 import random
-import pytz
-
-pytz.country_timezones('cn')
 
 # 系统变量
 card_id = os.environ['card_id']
