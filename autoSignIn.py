@@ -20,6 +20,7 @@ school_no = os.environ['school_no'] # 学校代码
 SERVER = os.environ['SERVER']
 SCKEY = os.environ['SCKEY']
 
+
 dkStart = datetime.now()
 def ali_pay_login():
     url = f"https://fxgl.jx.edu.cn/{school_no}/third/alipayLogin?cardId={card_id}&sfzMd5={sfzMd5}"
