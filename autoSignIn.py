@@ -123,11 +123,14 @@ def autoSignIn():
         myCookies = get_cookies(location)
         t = checkin(myCookies)
         log = create_log(t)
-        sendMsg(log)
+#         sendMsg(log)
+#         requests.get("https://sctapi.ftqq.com/{}.send?title=".format())
+        requests.get("https://sctapi.ftqq.com/{}.send?title={}&desp={}".format(SOCKEY,"打卡成功",log))
 
     except Exception as e:
         print('打卡失败！\n{}'.format(str(e)))
-        sendMsg("打卡失败！", str(e))
+        #  sendMsg("打卡失败！", str(e))
+        requests.get("https://sctapi.ftqq.com/SCT135282T3xQT7veStDDDfSdnliLnGt3W.send?title="+"打卡失败！")
 
 
 # 发送微信推送消息
