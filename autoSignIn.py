@@ -9,6 +9,10 @@ import os
 from datetime import datetime
 import random
 import pytz
+import smtplib
+from email.mime.text import MIMEText
+from email.header import Header
+from datetime import datetime
 
 
 tz = pytz.timezone('Asia/Shanghai')
@@ -18,6 +22,11 @@ sfzMd5 = "ed39281c8b62d37918c6e4efba261b1f"
 school_no = "4136010406"  # 学校代码
 SERVER = "on"
 SCKEY = "SCT135282T3xQT7veStDDDfSdnliLnGt3W"
+MAIL_NOTICE = 'on'
+MAILBOX = 'lin2472612203@163.com'
+mail_host = 'smtp.qq.com'
+mail_sender = '2472612203@qq.com'
+mail_pw = "trhirrozwjkddicg"
 
 dkStart = datetime.now()
 def ali_pay_login():
@@ -132,11 +141,13 @@ def autoSignIn():
         t = checkin(myCookies)
         log = create_log(t)
         sendMsg(log)
+        sentMail()
         print(log)
 
     except Exception as e:
         print('打卡失败！\n{}'.format(str(e)))
         sendMsg("打卡失败！", str(e))
+        sentMail("打卡失败！", str(e))
 
 
 # 发送微信推送消息
@@ -151,6 +162,25 @@ def sendMsg(m, error=''):
         url = 'https://sc.ftqq.com/{}.send?text={}&desp={}'.format(SCKEY, msg, '{}\n{}'.format(msg, error))
         requests.get(url)
 
-
+def sendMail(text="健康打卡成功", error=''):
+    print('发送邮件...')
+    if MAIL_NOTICE == 'on':
+        timeNow = datetime.now(tz).strftime('%Y-%m-%d-%H:%M:%S')
+        duration = datetime.now() - dkStart
+        content = "{}\n{}\n本次耗时{}秒！".format(timeNow, text, duration)
+        msg = MIMEText(content, 'plain', 'utf-8')
+        msg["From"] = Header(mail_sender, 'utf-8')
+        msg["To"] = Header(MAILBOX, 'utf-8')
+        subject = "{0}-{1}".format(time.strftime("%Y%m%d", time.localtime()), text)
+        msg["Subject"] = Header(subject, 'utf-8')
+        try:
+            server = smtplib.SMTP()
+            server.connect(mail_host, 25)
+            server.login(mail_sender, mail_pw)
+            server.sendmail(mail_sender, MAILBOX, msg.as_string())
+            server.quit()
+            print("邮件发送成功！")
+        except Exception as e:
+            print("邮件发送失败！\n{}".format(e))
 if __name__ == '__main__':
     autoSignIn()
