@@ -17,16 +17,16 @@ from datetime import datetime
 
 tz = pytz.timezone('Asia/Shanghai')
 # 系统变量
-card_id = "1161949599871569922"
-sfzMd5 = "ed39281c8b62d37918c6e4efba261b1f"
-school_no = "4136010406"  # 学校代码
+card_id = os.environ['card_id']
+sfzMd5 = os.environ['sfzMd5']
+school_no = os.environ['school_no']  # 学校代码
 SERVER = "on"
-SCKEY = "SCT135282T3xQT7veStDDDfSdnliLnGt3W"
+SCKEY = os.environ['SCKEY']
 MAIL_NOTICE = 'on'
 MAILBOX = 'lin2472612203@163.com'
 mail_host = 'smtp.qq.com'
 mail_sender = '2472612203@qq.com'
-mail_pw = "trhirrozwjkddicg"
+mail_pw = os.environ['mail_pw']
 
 dkStart = datetime.now()
 def ali_pay_login():
@@ -114,16 +114,7 @@ def checkin(my_cookies):
     # print(res.text)
     return res.text
 
-
-def print_log():
-    try:
-        f = open('lhplog.json', 'r', encoding='utf-8')
-        log = f.read()
-        print(log)
-        f.close()
-    except IOError:
-        print('cant open lhplog.json!')
-
+#创建打卡信息
 def create_log(text):
     msg = (re.search(r'("msg":.*?),', text)).group(1)
     tm = datetime.now(tz).strftime('%Y-%m-%d-%H:%M:%S')
