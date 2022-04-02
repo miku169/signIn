@@ -28,6 +28,7 @@ mail_host = 'smtp.qq.com'
 mail_sender = '2472612203@qq.com'
 mail_pw = os.environ['mail_pw']
 
+
 dkStart = datetime.now()
 def ali_pay_login():
     url = f"https://fxgl.jx.edu.cn/{school_no}/third/alipayLogin?cardId={card_id}&sfzMd5={sfzMd5}"
