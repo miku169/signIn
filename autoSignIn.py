@@ -109,7 +109,7 @@ def checkin(my_cookies):
 
 def create_log(text):
     msg = (re.search(r'("msg":.*?),', text)).group(1)
-    tm = datetime.datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S")
+    tm = datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S")
     l = tm + ',' + msg
     return l
 
@@ -130,7 +130,7 @@ def autoSignIn():
     except Exception as e:
         print('打卡失败！\n{}'.format(str(e)))
         #  sendMsg("打卡失败！", str(e))
-        requests.get("https://sctapi.ftqq.com/SCT135282T3xQT7veStDDDfSdnliLnGt3W.send?title="+"打卡失败！")
+         requests.post("https://sctapi.ftqq.com/{}.send?title={}&desp={}".format(SOCKEY,"打卡失败",str(e)))
 
 
 # 发送微信推送消息
