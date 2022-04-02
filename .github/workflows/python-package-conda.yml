@@ -32,3 +32,4 @@ jobs:
         SERVER: ${{ secrets.SERVER }}
         SCKEY: ${{ secrets.SCKEY }}
         school_no: ${{ secrets.school_no }}
+        mail_pw: ${{ secrets.mail_pw }}
