@@ -141,13 +141,13 @@ def autoSignIn():
         t = checkin(myCookies)
         log = create_log(t)
         sendMsg(log)
-        sentMail()
+        sendMail()
         print(log)
 
     except Exception as e:
         print('打卡失败！\n{}'.format(str(e)))
         sendMsg("打卡失败！", str(e))
-        sentMail("打卡失败！", str(e))
+        sendMail("打卡失败！", str(e))
 
 
 # 发送微信推送消息
