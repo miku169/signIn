@@ -8,18 +8,13 @@ import urllib
 import os
 from datetime import datetime
 import random
-import pytz
-
-tz = pytz.timezone('Asia/Shanghai')
-#获得此时区的当期那时间
 
 # 系统变量
-card_id = os.environ['card_id']
-sfzMd5 = os.environ['sfzMd5']
-school_no = os.environ['school_no'] # 学校代码
-SERVER = os.environ['SERVER']
-SCKEY = os.environ['SCKEY']
-
+card_id = "1161949599871569922"
+sfzMd5 = "ed39281c8b62d37918c6e4efba261b1f"
+school_no = "4136010406"  # 学校代码
+SERVER = "on"
+SCKEY = "SCT135282T3xQT7veStDDDfSdnliLnGt3W"
 
 dkStart = datetime.now()
 def ali_pay_login():
@@ -39,6 +34,7 @@ def ali_pay_login():
         # 'sign': sign,
         # 'ts': ts
     })
+    print(login.text)
     return login.history[0]  # 此处重定向到新的地址
 
 
@@ -107,9 +103,18 @@ def checkin(my_cookies):
     return res.text
 
 
+def print_log():
+    try:
+        f = open('lhplog.json', 'r', encoding='utf-8')
+        log = f.read()
+        print(log)
+        f.close()
+    except IOError:
+        print('cant open lhplog.json!')
+
 def create_log(text):
     msg = (re.search(r'("msg":.*?),', text)).group(1)
-    tm = datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S")
+    tm = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
     l = tm + ',' + msg
     return l
 
@@ -117,20 +122,17 @@ def create_log(text):
 # 自动打卡
 def autoSignIn():
     global dkStart
-    time.sleep(int(random.random() * 1000 // 1 % 60))
     try:
         location = ali_pay_login()
         myCookies = get_cookies(location)
         t = checkin(myCookies)
         log = create_log(t)
-#         sendMsg(log)
-#         requests.get("https://sctapi.ftqq.com/{}.send?title=".format())
-        requests.post("https://sctapi.ftqq.com/{}.send?title={}&desp={}".format(SOCKEY,"打卡成功",log))
+        sendMsg(log)
+        print(log)
 
     except Exception as e:
         print('打卡失败！\n{}'.format(str(e)))
-        #  sendMsg("打卡失败！", str(e))
-         requests.post("https://sctapi.ftqq.com/{}.send?title={}&desp={}".format(SOCKEY,"打卡失败",str(e)))
+        sendMsg("打卡失败！", str(e))
 
 
 # 发送微信推送消息
