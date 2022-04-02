@@ -10,6 +10,8 @@ from datetime import datetime
 import random
 import pytz
 
+
+tz = pytz.timezone('Asia/Shanghai')
 # 系统变量
 card_id = "1161949599871569922"
 sfzMd5 = "ed39281c8b62d37918c6e4efba261b1f"
