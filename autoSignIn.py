@@ -8,6 +8,7 @@ import urllib
 import os
 from datetime import datetime
 import random
+import pytz
 
 # 系统变量
 card_id = "1161949599871569922"
@@ -114,7 +115,7 @@ def print_log():
 
 def create_log(text):
     msg = (re.search(r'("msg":.*?),', text)).group(1)
-    tm = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+    tm = datetime.now(tz).strftime('%Y-%m-%d-%H:%M:%S')
     l = tm + ',' + msg
     return l
 
