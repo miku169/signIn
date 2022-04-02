@@ -125,7 +125,7 @@ def autoSignIn():
         log = create_log(t)
 #         sendMsg(log)
 #         requests.get("https://sctapi.ftqq.com/{}.send?title=".format())
-        requests.get("https://sctapi.ftqq.com/{}.send?title={}&desp={}".format(SOCKEY,"打卡成功",log))
+        requests.post("https://sctapi.ftqq.com/{}.send?title={}&desp={}".format(SOCKEY,"打卡成功",log))
 
     except Exception as e:
         print('打卡失败！\n{}'.format(str(e)))
