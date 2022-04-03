@@ -160,7 +160,7 @@ def sendMail(text="健康打卡成功", error=''):
         msg = MIMEText(content, 'plain', 'utf-8')
         msg["From"] = Header(mail_sender, 'utf-8')
         msg["To"] = Header(MAILBOX, 'utf-8')
-        subject = "{0}-{1}".format(time.strftime("%Y%m%d", time.localtime()), text)
+        subject = "{0}".format(time.strftime("%Y%m%d", time.localtime()))
         msg["Subject"] = Header(subject, 'utf-8')
         try:
             server = smtplib.SMTP()
