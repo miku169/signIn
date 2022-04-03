@@ -131,7 +131,7 @@ def autoSignIn():
         t = checkin(myCookies)
         log = create_log(t)
         sendMsg(log)
-        sendMail()
+        sendMail(log)
 
     except Exception as e:
         print('打卡失败！\n{}'.format(str(e)))
@@ -156,7 +156,7 @@ def sendMail(text="健康打卡成功", error=''):
     if MAIL_NOTICE == 'on':
         timeNow = datetime.now(tz).strftime('%Y-%m-%d-%H:%M:%S')
         duration = datetime.now() - dkStart
-        content = "{}\n{}\n本次耗时{}秒！".format(timeNow, text, duration)
+        content = "{}\n本次耗时{}秒！".format(text, duration.seconds)
         msg = MIMEText(content, 'plain', 'utf-8')
         msg["From"] = Header(mail_sender, 'utf-8')
         msg["To"] = Header(MAILBOX, 'utf-8')
