@@ -19,13 +19,13 @@ tz = pytz.timezone('Asia/Shanghai')
 card_id = os.environ['card_id']
 sfzMd5 = os.environ['sfzMd5']
 school_no = os.environ['school_no']  # 学校代码
-SERVER = "on"
+SERVER = "on"     #on/off 是否开始sever通知
 SCKEY = os.environ['SCKEY']
 MAIL_NOTICE = 'on'
 MAILBOX = 'lin2472612203@163.com'
 mail_host = 'smtp.qq.com'
 mail_sender = '2472612203@qq.com'
-mail_pw = "trhirrozwjkddicg"
+mail_pw = os.environ['mail_pw']
 
 dkStart = datetime.now()
 def ali_pay_login():
