@@ -15,9 +15,9 @@ from datetime import datetime
 
 tz = pytz.timezone('Asia/Shanghai')
 # 系统变量
-card_id = "1161949599871569922"
-sfzMd5 = "ed39281c8b62d37918c6e4efba261b1f"
-school_no = "4136010406"  # 学校代码
+card_id = os.environ['card_id']
+sfzMd5 = os.environ['sfzMd5']
+school_no = os.environ['school_no']  # 学校代码
 SERVER = "on"
 SCKEY = "SCT135282T3xQT7veStDDDfSdnliLnGt3W"
 MAIL_NOTICE = 'on'
