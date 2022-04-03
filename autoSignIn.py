@@ -11,6 +11,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.header import Header
 from datetime import datetime
+import os
 
 
 tz = pytz.timezone('Asia/Shanghai')
@@ -124,7 +125,7 @@ def create_log(text):
 def autoSignIn():
     global dkStart
     try:
-        time.sleep(int(random.random()*1000%60))
+        #time.sleep(int(random.random()*1000%60))
         location = ali_pay_login()
         myCookies = get_cookies(location)
         t = checkin(myCookies)
