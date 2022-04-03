@@ -125,7 +125,7 @@ def create_log(text):
 def autoSignIn():
     global dkStart
     try:
-        #time.sleep(int(random.random()*1000%60))
+        time.sleep(int(random.random()*1000%60))
         location = ali_pay_login()
         myCookies = get_cookies(location)
         t = checkin(myCookies)
@@ -156,11 +156,11 @@ def sendMail(text="健康打卡成功", error=''):
     if MAIL_NOTICE == 'on':
         timeNow = datetime.now(tz).strftime('%Y-%m-%d-%H:%M:%S')
         duration = datetime.now() - dkStart
-        content = "{}\n本次耗时{}秒！".format(text, duration.seconds)
+        content = "{}本次耗时{}秒！".format(text, duration.seconds)
         msg = MIMEText(content, 'plain', 'utf-8')
         msg["From"] = Header(mail_sender, 'utf-8')
         msg["To"] = Header(MAILBOX, 'utf-8')
-        subject = "{0}".format(time.strftime("%Y%m%d", time.localtime()))
+        subject = "{0}-{1}".format(time.strftime("%Y%m%d", time.localtime()),"健康打卡")
         msg["Subject"] = Header(subject, 'utf-8')
         try:
             server = smtplib.SMTP()
