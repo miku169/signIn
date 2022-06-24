@@ -28,9 +28,9 @@ jobs:
       run: |
         python ./autoSignIn.py
       env:
-        card_id: ${{ secrets.card_id }}
-        sfzMd5: ${{ secrets.sfzMd5 }}
         SERVER: ${{ secrets.SERVER }}
         SCKEY: ${{ secrets.SCKEY }}
-        school_no: ${{ secrets.school_no }}
-        mail_pw: ${{ secrets.mail_pw }}
+        SCHOOL_NO: ${{secrets.SCHOOL_NO}}
+        STUDENT_NO: ${{secrets.STUDENT_NO}}
+        MAIL_PW: ${{secrets.MAIL_PW}}
+        MAIL_SENDER: ${{secrets.MAIL_SENDER}}
