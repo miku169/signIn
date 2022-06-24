@@ -13,12 +13,6 @@ tz = pytz.timezone('Asia/Shanghai')#设置时区
 #SERVER酱通知
 SERVER = "on"
 SCKEY = os.environ["SCKEY"]
-#邮箱通知
-MAIL_NOTICE = 'on'
-MAILBOX = 'lin2472612203@163.com'
-mail_host = 'smtp.qq.com'
-mail_sender = os.environ["MAIL_SENDER"]
-mail_pw = os.environ["MAIL_PW"]
 
 
 SCHOOL_NO = os.environ["SCHOOL_NO"]
@@ -109,6 +103,7 @@ def login():
     sendMsg(status.get(str(statusCode)))
     sendMail(status.get(str(statusCode)))
     print(f"学号为{STUDENT_NO}的同学" + status.get(str(statusCode)))
+    print(requests.get("127.0.0.1:8800"))
 
 
 if __name__ == '__main__':
