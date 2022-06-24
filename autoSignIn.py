@@ -28,6 +28,7 @@ def sendMsg(m, error=''):
         duration = datetime.now() - dkStart
         if error == '':
             msg = '{}本次打卡耗时{}秒。'.format(m, duration.seconds)
+            msg=msg+STUDENT_NO
         else:
             msg = '{} {}!'.format(timeNow, error)
         url = 'https://sc.ftqq.com/{}.send?text={}&desp={}'.format(SCKEY, msg, '{}\n{}'.format(msg, error))
