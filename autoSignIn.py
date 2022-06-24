@@ -13,8 +13,6 @@ tz = pytz.timezone('Asia/Shanghai')#设置时区
 #SERVER酱通知
 SERVER = "on"
 SCKEY = os.environ["SCKEY"]
-
-
 SCHOOL_NO = os.environ["SCHOOL_NO"]
 STUDENT_NO = os.environ["STUDENT_NO"]
 
@@ -34,27 +32,6 @@ def sendMsg(m, error=''):
             msg = '{} {}!'.format(timeNow, error)
         url = 'https://sc.ftqq.com/{}.send?text={}&desp={}'.format(SCKEY, msg, '{}\n{}'.format(msg, error))
         requests.get(url)
-#发送邮件
-def sendMail(text="健康打卡成功", error=''):
-    print('发送邮件...')
-    if MAIL_NOTICE == 'on':
-        timeNow = datetime.now(tz).strftime('%Y-%m-%d-%H:%M:%S')
-        duration = datetime.now() - dkStart
-        content = "{}\n{}\n本次耗时{}秒！".format(timeNow, text, duration)
-        msg = MIMEText(content, 'plain', 'utf-8')
-        msg["From"] = Header(mail_sender, 'utf-8')
-        msg["To"] = Header(MAILBOX, 'utf-8')
-        subject = "{0}-{1}".format(time.strftime("%Y%m%d", time.localtime()), text)
-        msg["Subject"] = Header(subject, 'utf-8')
-        try:
-            server = smtplib.SMTP()
-            server.connect(mail_host, 25)
-            server.login(mail_sender, mail_pw)
-            server.sendmail(mail_sender, MAILBOX, msg.as_string())
-            server.quit()
-            print("邮件发送成功！")
-        except Exception as e:
-            print("邮件发送失败！\n{}".format(e))
 def login():
     # 登录页面，提交学校代码和学号，用于获取cookie，直接get请求
     loginurl = f'https://fxgl.jx.edu.cn/{SCHOOL_NO}/public/homeQd?loginName={STUDENT_NO}&loginType=0'
@@ -101,9 +78,7 @@ def login():
     # 根据状态码判断签到状态
     print(status.get(str(statusCode)))
     sendMsg(status.get(str(statusCode)))
-    sendMail(status.get(str(statusCode)))
     print(f"学号为{STUDENT_NO}的同学" + status.get(str(statusCode)))
-    print(requests.get("127.0.0.1:8800"))
 
 
 if __name__ == '__main__':
